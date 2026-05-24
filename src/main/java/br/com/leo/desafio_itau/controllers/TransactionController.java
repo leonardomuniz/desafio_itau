@@ -33,6 +33,11 @@ public class TransactionController {
 
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody InputTransactionDto input) {
+        Transaction transaction = new Transaction();
+        transaction.setValor(input.valor());
+        transaction.setDataHora(input.dataHora());
+
+        transactionInsertService.run(transaction);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
