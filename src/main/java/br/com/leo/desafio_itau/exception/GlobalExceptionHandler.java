@@ -1,6 +1,6 @@
 package br.com.leo.desafio_itau.exception;
 
-import br.com.leo.desafio_itau.entity.ErroResposta;
+import br.com.leo.desafio_itau.entity.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(RegraNegocioException.class)
-    public ResponseEntity<ErroResposta> handleRegraNegocio(RegraNegocioException exception, HttpServletRequest request) {
+    @ExceptionHandler(BusinessRuleException.class)
+    public ResponseEntity<ErrorResponse> handleBusinessRule(BusinessRuleException exception, HttpServletRequest request) {
         HttpStatus status = HttpStatus.UNPROCESSABLE_CONTENT;
 
-        ErroResposta erro = new ErroResposta(
+        ErrorResponse erro = new ErrorResponse(
                 OffsetDateTime.now(),
                 status.value(),
                 "Erro de validação de Negócio",
@@ -31,10 +31,10 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(Exception.class)
-    public  ResponseEntity<ErroResposta> handleErroGenerico(Exception exception, HttpServletRequest request) {
+    public  ResponseEntity<ErrorResponse> handleGenericError(Exception exception, HttpServletRequest request) {
         HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
-        ErroResposta erro = new ErroResposta(
+        ErrorResponse erro = new ErrorResponse(
                 OffsetDateTime.now(),
                 status.value(),
                 "Erro Interno no Servidor",
@@ -46,14 +46,14 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErroResposta> handleValidacaoJakarta(MethodArgumentNotValidException exception, HttpServletRequest request) {
+    public ResponseEntity<ErrorResponse> HandleJakartaValidation(MethodArgumentNotValidException exception, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
 
         String mensagensDeErro = exception.getBindingResult().getFieldErrors().stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
                 .collect(Collectors.joining("; "));
 
-        ErroResposta erro = new ErroResposta(
+        ErrorResponse erro = new ErrorResponse(
                 OffsetDateTime.now(),
                 status.value(),
                 "Erro de Validação nos Dados Enviados",

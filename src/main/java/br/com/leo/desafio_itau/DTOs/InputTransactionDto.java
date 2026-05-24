@@ -6,7 +6,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.time.OffsetDateTime;
 
-public record InputTransacaoDto(
+public record InputTransactionDto(
         @NotNull(message = "O valor é obrigatório")
         @PositiveOrZero(message = "O valor da transação deve ser maior ou igual a zero")
         Double valor,
