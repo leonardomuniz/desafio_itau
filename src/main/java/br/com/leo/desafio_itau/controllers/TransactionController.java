@@ -3,6 +3,7 @@ package br.com.leo.desafio_itau.controllers;
 import br.com.leo.desafio_itau.DTOs.InputTransactionDto;
 import br.com.leo.desafio_itau.entities.Transaction;
 import br.com.leo.desafio_itau.exceptions.BusinessRuleException;
+import br.com.leo.desafio_itau.services.transactions.TransactionClearService;
 import br.com.leo.desafio_itau.services.transactions.TransactionInsertService;
 import br.com.leo.desafio_itau.services.transactions.TransactionListService;
 import jakarta.validation.Valid;
@@ -18,11 +19,13 @@ import java.util.List;
 public class TransactionController {
     private final TransactionInsertService transactionInsertService;
     private final TransactionListService transactionListService;
+    private final TransactionClearService transactionClearService;
 
     @Autowired
-    public TransactionController(TransactionInsertService transactionInsertService, TransactionListService transactionListService) {
+    public TransactionController(TransactionInsertService transactionInsertService, TransactionListService transactionListService, TransactionClearService transactionClearService) {
         this.transactionInsertService = transactionInsertService;
         this.transactionListService = transactionListService;
+        this.transactionClearService = transactionClearService;
     }
 
     @GetMapping
@@ -40,6 +43,13 @@ public class TransactionController {
         transactionInsertService.run(transaction);
 
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> clear() {
+        transactionClearService.run();
+
+        return  ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

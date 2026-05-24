@@ -1,18 +1,17 @@
 package br.com.leo.desafio_itau.services.transactions;
 
-import br.com.leo.desafio_itau.entities.Transaction;
 import br.com.leo.desafio_itau.repositories.TransactionRepositoryInMemory;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TransactionInsertService {
+public class TransactionClearService {
     private final TransactionRepositoryInMemory transactionRepositoryInMemory;
 
-    public TransactionInsertService(TransactionRepositoryInMemory transactionRepositoryInMemory) {
+    public TransactionClearService(TransactionRepositoryInMemory transactionRepositoryInMemory) {
         this.transactionRepositoryInMemory = transactionRepositoryInMemory;
     }
 
-    public void run(Transaction transacao) {
-        transactionRepositoryInMemory.save(transacao);
+    public void run() {
+        transactionRepositoryInMemory.clear();
     }
 }
