@@ -1,6 +1,6 @@
-package br.com.leo.desafio_itau.exception;
+package br.com.leo.desafio_itau.exceptions;
 
-import br.com.leo.desafio_itau.entity.ErrorResponse;
+import br.com.leo.desafio_itau.entities.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

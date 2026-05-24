@@ -1,8 +1,8 @@
 package br.com.leo.desafio_itau.controllers;
 
 import br.com.leo.desafio_itau.DTOs.InputTransactionDto;
-import br.com.leo.desafio_itau.exception.BusinessRuleException;
-import br.com.leo.desafio_itau.services.transacao.TransactionInsertService;
+import br.com.leo.desafio_itau.exceptions.BusinessRuleException;
+import br.com.leo.desafio_itau.services.transactions.TransactionInsertService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

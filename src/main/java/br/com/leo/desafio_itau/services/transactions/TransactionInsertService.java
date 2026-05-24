@@ -1,4 +1,4 @@
-package br.com.leo.desafio_itau.services.transacao;
+package br.com.leo.desafio_itau.services.transactions;
 
 import br.com.leo.desafio_itau.DTOs.InputTransactionDto;
 import org.springframework.stereotype.Service;

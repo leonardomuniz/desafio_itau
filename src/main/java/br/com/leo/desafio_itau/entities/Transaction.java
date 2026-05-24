@@ -1,4 +1,4 @@
-package br.com.leo.desafio_itau.entity;
+package br.com.leo.desafio_itau.entities;
 
 import lombok.*;
 
