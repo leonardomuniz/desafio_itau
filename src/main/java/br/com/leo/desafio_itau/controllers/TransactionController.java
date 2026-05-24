@@ -2,10 +2,9 @@ package br.com.leo.desafio_itau.controllers;
 
 import br.com.leo.desafio_itau.DTOs.InputTransactionDto;
 import br.com.leo.desafio_itau.entities.Transaction;
-import br.com.leo.desafio_itau.exceptions.BusinessRuleException;
 import br.com.leo.desafio_itau.services.transactions.TransactionClearService;
 import br.com.leo.desafio_itau.services.transactions.TransactionInsertService;
-import br.com.leo.desafio_itau.services.transactions.TransactionListService;
+import br.com.leo.desafio_itau.services.statistic.StatisticListService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,20 +17,12 @@ import java.util.List;
 @RequestMapping("/transacao")
 public class TransactionController {
     private final TransactionInsertService transactionInsertService;
-    private final TransactionListService transactionListService;
     private final TransactionClearService transactionClearService;
 
     @Autowired
-    public TransactionController(TransactionInsertService transactionInsertService, TransactionListService transactionListService, TransactionClearService transactionClearService) {
+    public TransactionController(TransactionInsertService transactionInsertService, StatisticListService statisticListService, TransactionClearService transactionClearService) {
         this.transactionInsertService = transactionInsertService;
-        this.transactionListService = transactionListService;
         this.transactionClearService = transactionClearService;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Transaction>> list() {
-        List<Transaction> response = transactionListService.run();
-        return ResponseEntity.ok(response);
     }
 
     @PostMapping
