@@ -10,6 +10,7 @@ import java.time.OffsetDateTime;
 @NoArgsConstructor
 @ToString
 public class Transaction {
+    private Long id;
     private double valor;
     private OffsetDateTime dataHora;
 }
